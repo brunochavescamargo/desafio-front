@@ -11,6 +11,25 @@ import { NgForm } from '@angular/forms';
 })
 export class PrincipalComponent {
 
+  //eventos: any[] = []; // sua lista vinda da API
+  paginaAtual: number = 1;
+  itensPorPagina: number = 5;
+
+  get totalPaginas(): number {
+    return Math.ceil(this.eventos.length / this.itensPorPagina);
+  }
+
+  get eventosPaginados(): any[] {
+    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
+    return this.eventos.slice(inicio, inicio + this.itensPorPagina);
+  }
+
+  mudarPagina(pagina: number) {
+    if (pagina >= 1 && pagina <= this.totalPaginas) {
+      this.paginaAtual = pagina;
+    }
+  }
+
 
   // Objeto do tipo Cliente
   evento = new Evento();
