@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Cliente } from '../modelo/Cliente';
+import { Evento } from '../modelo/Evento';
 import { Page } from '../modelo/Page';
 @Injectable({
   providedIn: 'root'
 })
-export class ClienteService {
+export class EventoService {
 
   // Url da API
   private url:string = 'http://localhost:8080/api/events?page=0&size=10';
@@ -17,22 +17,22 @@ export class ClienteService {
   // Construtor
   constructor(private http:HttpClient) { }
 
-  // Método para selecionar todos os clientes
-  selecionar(): Observable<Page<Cliente>> {
-    return this.http.get<Page<Cliente>>(this.url);
+  // Método para selecionar todos os Evento
+  selecionar(): Observable<Page<Evento>> {
+    return this.http.get<Page<Evento>>(this.url);
   }
 
-  // Método para cadastrar clientes
-  cadastrar(obj:Cliente):Observable<Cliente>{
-    return this.http.post<Cliente>(this.urlPost, obj);
+  // Método para cadastrar Evento
+  cadastrar(obj:Evento):Observable<Evento>{
+    return this.http.post<Evento>(this.urlPost, obj);
   }
 
-  // Método para editar clientes
-  editar(obj:Cliente):Observable<Cliente>{
-    return this.http.put<Cliente>(this.urlPut+obj.id, obj);
+  // Método para editar Evento
+  editar(obj:Evento):Observable<Evento>{
+    return this.http.put<Evento>(this.urlPut+obj.id, obj);
   }
 
-  // Método para remover clientes
+  // Método para remover Evento
   remover(codigo:number):Observable<void>{
     return this.http.delete<void>(this.urlDelete + '/' + codigo);
   }

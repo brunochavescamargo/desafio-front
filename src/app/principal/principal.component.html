@@ -1,17 +1,21 @@
-<form>
+<form #formEvento="ngForm">
     <img src="assets/gestao.png">
 
-    <input type="text"   placeholder="Título"   class="form-control" name="titulo"   [(ngModel)]="cliente.titulo">                  
-    <input type="text"   placeholder="Descrição"  class="form-control" name="descricao"  [(ngModel)]="cliente.descricao">
-    <input type="text"   placeholder="Data e Hora" class="form-control" name="dataHoraEvento" [(ngModel)]="cliente.dataHoraEvento">
-    <input type="text"   placeholder="Local" class="form-control" name="local" [(ngModel)]="cliente.local">
-    <input type="hidden"   placeholder="id"  class="form-control" name="id" [(ngModel)]="cliente.id">
+    <input type="text" placeholder="Título" class="form-control" name="titulo" [(ngModel)]="evento.titulo" required >
 
-    <input type="button" value="Cadastrar"  *ngIf="btnCadastro"   class="btn btn-primary"   (click)="cadastrar()">
-    <input type="button" value="Alterar"    *ngIf="!btnCadastro"  class="btn btn-warning"   (click)="editar()">
-    <input type="button" value="Remover"    *ngIf="!btnCadastro"  class="btn btn-danger"    (click)="remover()">
-    <input type="button" value="Cancelar"   *ngIf="!btnCadastro"  class="btn btn-secondary" (click)="cancelar()">
+    <input type="text" placeholder="Descrição" class="form-control" name="descricao" [(ngModel)]="evento.descricao" required>
+    <input type="text" placeholder="Data e Hora" class="form-control" name="dataHoraEvento"
+        [(ngModel)]="evento.dataHoraEvento" required>
+    <input type="text" placeholder="Local" class="form-control" name="local" [(ngModel)]="evento.local" required>
+    <input type="hidden" placeholder="ID" class="form-control" name="id" [(ngModel)]="evento.id">
+
+    <input type="button" value="Cadastrar" *ngIf="btnCadastro" class="btn btn-primary" (click)="cadastrar(formEvento)">
+    <input type="button" value="Alterar" *ngIf="!btnCadastro" class="btn btn-warning" (click)="editar(formEvento)">
+    <input type="button" value="Remover" *ngIf="!btnCadastro" class="btn btn-danger" (click)="remover()">
+    <input type="button" value="Cancelar" *ngIf="!btnCadastro" class="btn btn-secondary" (click)="cancelar()">
 </form>
+
+
 
 <table class="table" *ngIf="tabela">
     <thead>
@@ -26,7 +30,7 @@
     </thead>
 
     <tbody>
-        <tr *ngFor="let c of clientes; index as i">
+        <tr *ngFor="let c of eventos; index as i">
             <td>{{i+1}}</td>
             <td>{{c.titulo}}</td>
             <td>{{c.descricao}}</td>

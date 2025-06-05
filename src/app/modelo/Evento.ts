@@ -1,4 +1,4 @@
-export class Cliente{
+export class Evento{
 
     id?: number;
     titulo: string = '';
