@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ClienteService } from '../servico/cliente.service';
 import { Cliente } from '../modelo/Cliente';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-principal',
@@ -22,13 +23,13 @@ export class PrincipalComponent {
     clientes:Cliente[] = [];
 
     // Construtor
-    constructor(private servico:ClienteService){}
+    constructor(private servico:ClienteService, private snackBar: MatSnackBar){}
 
     // Método de seleção
     selecionar(): void {
       this.servico.selecionar()
         .subscribe(retorno => {
-          this.clientes = retorno.content; // ✅ Aqui pegamos o array
+          this.clientes = retorno.content;
         });
     }
 
@@ -44,7 +45,7 @@ export class PrincipalComponent {
         this.cliente = new Cliente();
 
         // Mensagem
-        alert('Cliente cadastrado com sucesso!');
+        this.snackBar.open('Evento cadastrado com sucesso!', 'Fechar', { duration: 5000 });
       });
     }
 
@@ -86,7 +87,7 @@ export class PrincipalComponent {
         this.tabela = true;
 
         // Mensagem
-        alert('Cliente alterado com sucesso!');
+        this.snackBar.open('Evento alterado com sucesso!', 'Fechar', { duration: 5000 });
 
       });
 
@@ -116,7 +117,7 @@ export class PrincipalComponent {
         this.tabela = true;
 
         // Mensagem
-        alert('Cliente removido com sucesso!');
+        this.snackBar.open('Evento removido com sucesso!', 'Fechar', { duration: 5000 });
 
       });
 
